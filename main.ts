@@ -34,6 +34,15 @@ function loadSettingsApp () {
         music.play(music.createSoundEffect(WaveShape.Noise, 3900, 3500, 255, 0, 10, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
     })
 }
+controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (LoadedApp == "MainMenu") {
+    	
+    } else {
+        if (LoadedApp == "DemoGame") {
+            demoGameInputPressed("up")
+        }
+    }
+})
 function sendConsoleLog (id: string, string: string) {
     console.log("[" + id + "]: " + string)
     consolelog.push("[" + id + "]: " + string)
@@ -256,7 +265,134 @@ function loadUserIcon (icon_id: string, x: number, y: number) {
 }
 function demoGameInputPressed (input2: string) {
     if (input2 == "a") {
-    	
+        DemoPlayerSwordSwung = true
+        animation.runImageAnimation(
+        DemoPlayer,
+        [img`
+            ........................
+            ....ffffff..............
+            ..ffeeeef2f.............
+            .ffeeeef222f............
+            .feeeffeeeef...cc.......
+            .ffffee2222ef.cdc.......
+            .fe222ffffe2fcddc.......
+            fffffffeeeffcddc........
+            ffe44ebf44ecddc.........
+            fee4d41fddecdc..........
+            .feee4dddedccc..........
+            ..ffee44e4dde...........
+            ...f222244ee............
+            ...f2222e2f.............
+            ...f444455f.............
+            ....ffffff..............
+            .....fff................
+            ........................
+            ........................
+            ........................
+            ........................
+            ........................
+            ........................
+            ........................
+            `,img`
+            ........................
+            .......fff..............
+            ....fffff2f.............
+            ..ffeeeee22ff...........
+            .ffeeeeee222ff..........
+            .feeeefffeeeef..........
+            .fffffeee2222ef.........
+            fffe222fffffe2f.........
+            fffffffffeeefff.....cc..
+            fefe44ebbf44eef...ccdc..
+            .fee4d4bbfddef..ccddcc..
+            ..feee4dddddfeecdddc....
+            ...f2222222eeddcdcc.....
+            ...f444445e44ddccc......
+            ...ffffffffeeee.........
+            ...fff...ff.............
+            ........................
+            ........................
+            ........................
+            ........................
+            ........................
+            ........................
+            ........................
+            ........................
+            `,img`
+            .......ff...............
+            ....ffff2ff.............
+            ..ffeeeef2ff............
+            .ffeeeeef22ff...........
+            .feeeeffeeeef...........
+            .fffffee2222ef..........
+            fffe222ffffe2f..........
+            ffffffffeeefff..........
+            fefe44ebf44eef..........
+            .fee4d4bfddef...........
+            ..feee4dddee.c..........
+            ...f2222eeddeccccccc....
+            ...f444e44ddecddddd.....
+            ...fffffeeee.ccccc......
+            ..ffffffff...c..........
+            ..fff..ff...............
+            ........................
+            ........................
+            ........................
+            ........................
+            ........................
+            ........................
+            ........................
+            ........................
+            `,img`
+            ....ffffff..............
+            ..ffeeeef2f.............
+            .ffeeeef222f............
+            .feeeffeeeef............
+            .ffffee2222ef...........
+            .fe222ffffe2f...........
+            fffffffeeefff...........
+            ffe44ebf44eef...........
+            fee4d41fddef............
+            .feee4ddddf.............
+            ..fdde444ef.............
+            ..fdde22ccc.............
+            ...eef22cdc.............
+            ...f4444cddc............
+            ....fffffcddc...........
+            .....fff..cddc..........
+            ...........cdc..........
+            ............cc..........
+            ........................
+            ........................
+            ........................
+            ........................
+            ........................
+            ........................
+            `],
+        100,
+        false
+        )
+        timer.after(400, function () {
+            DemoPlayerSwordSwung = false
+            DemoPlayer.setImage(img`
+                . . . . . . f f f f . . . . . . 
+                . . . . f f f 2 2 f f f . . . . 
+                . . . f f f 2 2 2 2 f f f . . . 
+                . . f f f e e e e e e f f f . . 
+                . . f f e 2 2 2 2 2 2 e e f . . 
+                . . f e 2 f f f f f f 2 e f . . 
+                . . f f f f e e e e f f f f . . 
+                . f f e f b f 4 4 f b f e f f . 
+                . f e e 4 1 f d d f 1 4 e e f . 
+                . . f e e d d d d d d e e f . . 
+                . . . f e e 4 4 4 4 e e f . . . 
+                . . e 4 f 2 2 2 2 2 2 f 4 e . . 
+                . . 4 d f 2 2 2 2 2 2 f d 4 . . 
+                . . 4 4 f 4 4 5 5 4 4 f 4 4 . . 
+                . . . . . f f f f f f . . . . . 
+                . . . . . f f . . f f . . . . . 
+                `)
+        })
     }
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -281,8 +417,8 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 function loadDemoGame () {
+    info.startCountdown(300)
     LoadedApp = "DemoGame"
-    DemoPlayerHasKey = false
     info.setLife(3)
     DemoPlayer = sprites.create(img`
         . . . . . . f f f f . . . . . . 
@@ -305,11 +441,310 @@ function loadDemoGame () {
     controller.moveSprite(DemoPlayer)
     scene.cameraFollowSprite(DemoPlayer)
     tiles.setCurrentTilemap(tilemap`level1`)
+    characterAnimations.loopFrames(
+    DemoPlayer,
+    [img`
+        . . . . . . f f f f . . . . . . 
+        . . . . f f e e e e f f . . . . 
+        . . . f e e e f f e e e f . . . 
+        . . f f f f f 2 2 f f f f f . . 
+        . . f f e 2 e 2 2 e 2 e f f . . 
+        . . f e 2 f 2 f f 2 f 2 e f . . 
+        . . f f f 2 2 e e 2 2 f f f . . 
+        . f f e f 2 f e e f 2 f e f f . 
+        . f e e f f e e e e f e e e f . 
+        . . f e e e e e e e e e e f . . 
+        . . . f e e e e e e e e f . . . 
+        . . e 4 f f f f f f f f 4 e . . 
+        . . 4 d f 2 2 2 2 2 2 f d 4 . . 
+        . . 4 4 f 4 4 4 4 4 4 f 4 4 . . 
+        . . . . . f f f f f f . . . . . 
+        . . . . . f f . . f f . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . f f f f . . . . . . 
+        . . . . f f e e e e f f . . . . 
+        . . . f e e e f f e e e f . . . 
+        . . . f f f f 2 2 f f f f . . . 
+        . . f f e 2 e 2 2 e 2 e f f . . 
+        . . f e 2 f 2 f f f 2 f e f . . 
+        . . f f f 2 f e e 2 2 f f f . . 
+        . . f e 2 f f e e 2 f e e f . . 
+        . f f e f f e e e f e e e f f . 
+        . f f e e e e e e e e e e f f . 
+        . . . f e e e e e e e e f . . . 
+        . . . e f f f f f f f f 4 e . . 
+        . . . 4 f 2 2 2 2 2 e d d 4 . . 
+        . . . e f f f f f f e e 4 . . . 
+        . . . . f f f . . . . . . . . . 
+        `,img`
+        . . . . . . f f f f . . . . . . 
+        . . . . f f e e e e f f . . . . 
+        . . . f e e e f f e e e f . . . 
+        . . f f f f f 2 2 f f f f f . . 
+        . . f f e 2 e 2 2 e 2 e f f . . 
+        . . f e 2 f 2 f f 2 f 2 e f . . 
+        . . f f f 2 2 e e 2 2 f f f . . 
+        . f f e f 2 f e e f 2 f e f f . 
+        . f e e f f e e e e f e e e f . 
+        . . f e e e e e e e e e e f . . 
+        . . . f e e e e e e e e f . . . 
+        . . e 4 f f f f f f f f 4 e . . 
+        . . 4 d f 2 2 2 2 2 2 f d 4 . . 
+        . . 4 4 f 4 4 4 4 4 4 f 4 4 . . 
+        . . . . . f f f f f f . . . . . 
+        . . . . . f f . . f f . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . f f f f . . . . . . 
+        . . . . f f e e e e f f . . . . 
+        . . . f e e e f f e e e f . . . 
+        . . . f f f f 2 2 f f f f . . . 
+        . . f f e 2 e 2 2 e 2 e f f . . 
+        . . f e f 2 f f f 2 f 2 e f . . 
+        . . f f f 2 2 e e f 2 f f f . . 
+        . . f e e f 2 e e f f 2 e f . . 
+        . f f e e e f e e e f f e f f . 
+        . f f e e e e e e e e e e f f . 
+        . . . f e e e e e e e e f . . . 
+        . . e 4 f f f f f f f f e . . . 
+        . . 4 d d e 2 2 2 2 2 f 4 . . . 
+        . . . 4 e e f f f f f f e . . . 
+        . . . . . . . . . f f f . . . . 
+        `],
+    100,
+    characterAnimations.rule(Predicate.MovingUp)
+    )
+    characterAnimations.loopFrames(
+    DemoPlayer,
+    [img`
+        . . . . . . f f f f . . . . . . 
+        . . . . f f f 2 2 f f f . . . . 
+        . . . f f f 2 2 2 2 f f f . . . 
+        . . f f f e e e e e e f f f . . 
+        . . f f e 2 2 2 2 2 2 e e f . . 
+        . . f e 2 f f f f f f 2 e f . . 
+        . . f f f f e e e e f f f f . . 
+        . f f e f b f 4 4 f b f e f f . 
+        . f e e 4 1 f d d f 1 4 e e f . 
+        . . f e e d d d d d d e e f . . 
+        . . . f e e 4 4 4 4 e e f . . . 
+        . . e 4 f 2 2 2 2 2 2 f 4 e . . 
+        . . 4 d f 2 2 2 2 2 2 f d 4 . . 
+        . . 4 4 f 4 4 5 5 4 4 f 4 4 . . 
+        . . . . . f f f f f f . . . . . 
+        . . . . . f f . . f f . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . f f f f . . . . . . 
+        . . . . f f f 2 2 f f f . . . . 
+        . . . f f f 2 2 2 2 f f f . . . 
+        . . f f f e e e e e e f f f . . 
+        . . f f e 2 2 2 2 2 2 e e f . . 
+        . f f e 2 f f f f f f 2 e f f . 
+        . f f f f f e e e e f f f f f . 
+        . . f e f b f 4 4 f b f e f . . 
+        . . f e 4 1 f d d f 1 4 e f . . 
+        . . . f e 4 d d d d 4 e f e . . 
+        . . f e f 2 2 2 2 e d d 4 e . . 
+        . . e 4 f 2 2 2 2 e d d e . . . 
+        . . . . f 4 4 5 5 f e e . . . . 
+        . . . . f f f f f f f . . . . . 
+        . . . . f f f . . . . . . . . . 
+        `,img`
+        . . . . . . f f f f . . . . . . 
+        . . . . f f f 2 2 f f f . . . . 
+        . . . f f f 2 2 2 2 f f f . . . 
+        . . f f f e e e e e e f f f . . 
+        . . f f e 2 2 2 2 2 2 e e f . . 
+        . . f e 2 f f f f f f 2 e f . . 
+        . . f f f f e e e e f f f f . . 
+        . f f e f b f 4 4 f b f e f f . 
+        . f e e 4 1 f d d f 1 4 e e f . 
+        . . f e e d d d d d d e e f . . 
+        . . . f e e 4 4 4 4 e e f . . . 
+        . . e 4 f 2 2 2 2 2 2 f 4 e . . 
+        . . 4 d f 2 2 2 2 2 2 f d 4 . . 
+        . . 4 4 f 4 4 5 5 4 4 f 4 4 . . 
+        . . . . . f f f f f f . . . . . 
+        . . . . . f f . . f f . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . f f f f . . . . . . 
+        . . . . f f f 2 2 f f f . . . . 
+        . . . f f f 2 2 2 2 f f f . . . 
+        . . f f f e e e e e e f f f . . 
+        . . f e e 2 2 2 2 2 2 e f f . . 
+        . f f e 2 f f f f f f 2 e f f . 
+        . f f f f f e e e e f f f f f . 
+        . . f e f b f 4 4 f b f e f . . 
+        . . f e 4 1 f d d f 1 4 e f . . 
+        . . e f e 4 d d d d 4 e f . . . 
+        . . e 4 d d e 2 2 2 2 f e f . . 
+        . . . e d d e 2 2 2 2 f 4 e . . 
+        . . . . e e f 5 5 4 4 f . . . . 
+        . . . . . f f f f f f f . . . . 
+        . . . . . . . . . f f f . . . . 
+        `],
+    100,
+    characterAnimations.rule(Predicate.MovingDown)
+    )
+    characterAnimations.loopFrames(
+    DemoPlayer,
+    [img`
+        . . . . f f f f f f . . . . . . 
+        . . . f 2 f e e e e f f . . . . 
+        . . f 2 2 2 f e e e e f f . . . 
+        . . f e e e e f f e e e f . . . 
+        . f e 2 2 2 2 e e f f f f . . . 
+        . f 2 e f f f f 2 2 2 e f . . . 
+        . f f f e e e f f f f f f f . . 
+        . f e e 4 4 f b e 4 4 e f f . . 
+        . . f e d d f 1 4 d 4 e e f . . 
+        . . . f d d d d 4 e e e f . . . 
+        . . . f e 4 4 4 e e f f . . . . 
+        . . . f 2 2 2 e d d 4 . . . . . 
+        . . . f 2 2 2 e d d e . . . . . 
+        . . . f 5 5 4 f e e f . . . . . 
+        . . . . f f f f f f . . . . . . 
+        . . . . . . f f f . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . f f f f f f . . . . . . 
+        . . . f 2 f e e e e f f . . . . 
+        . . f 2 2 2 f e e e e f f . . . 
+        . . f e e e e f f e e e f . . . 
+        . f e 2 2 2 2 e e f f f f . . . 
+        . f 2 e f f f f 2 2 2 e f . . . 
+        . f f f e e e f f f f f f f . . 
+        . f e e 4 4 f b e 4 4 e f f . . 
+        . . f e d d f 1 4 d 4 e e f . . 
+        . . . f d d d e e e e e f . . . 
+        . . . f e 4 e d d 4 f . . . . . 
+        . . . f 2 2 e d d e f . . . . . 
+        . . f f 5 5 f e e f f f . . . . 
+        . . f f f f f f f f f f . . . . 
+        . . . f f f . . . f f . . . . . 
+        `,img`
+        . . . . f f f f f f . . . . . . 
+        . . . f 2 f e e e e f f . . . . 
+        . . f 2 2 2 f e e e e f f . . . 
+        . . f e e e e f f e e e f . . . 
+        . f e 2 2 2 2 e e f f f f . . . 
+        . f 2 e f f f f 2 2 2 e f . . . 
+        . f f f e e e f f f f f f f . . 
+        . f e e 4 4 f b e 4 4 e f f . . 
+        . . f e d d f 1 4 d 4 e e f . . 
+        . . . f d d d d 4 e e e f . . . 
+        . . . f e 4 4 4 e e f f . . . . 
+        . . . f 2 2 2 e d d 4 . . . . . 
+        . . . f 2 2 2 e d d e . . . . . 
+        . . . f 5 5 4 f e e f . . . . . 
+        . . . . f f f f f f . . . . . . 
+        . . . . . . f f f . . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . f f f f f f . . . . . . 
+        . . . f 2 f e e e e f f . . . . 
+        . . f 2 2 2 f e e e e f f . . . 
+        . . f e e e e f f e e e f . . . 
+        . f e 2 2 2 2 e e f f f f . . . 
+        . f 2 e f f f f 2 2 2 e f . . . 
+        . f f f e e e f f f f f f f . . 
+        . f e e 4 4 f b e 4 4 e f f . . 
+        . . f e d d f 1 4 d 4 e e f . . 
+        . . . f d d d d 4 e e e f . . . 
+        . . . f e 4 4 4 e d d 4 . . . . 
+        . . . f 2 2 2 2 e d d e . . . . 
+        . . f f 5 5 4 4 f e e f . . . . 
+        . . f f f f f f f f f f . . . . 
+        . . . f f f . . . f f . . . . . 
+        `],
+    100,
+    characterAnimations.rule(Predicate.MovingLeft)
+    )
+    characterAnimations.loopFrames(
+    DemoPlayer,
+    [img`
+        . . . . . . f f f f f f . . . . 
+        . . . . f f e e e e f 2 f . . . 
+        . . . f f e e e e f 2 2 2 f . . 
+        . . . f e e e f f e e e e f . . 
+        . . . f f f f e e 2 2 2 2 e f . 
+        . . . f e 2 2 2 f f f f e 2 f . 
+        . . f f f f f f f e e e f f f . 
+        . . f f e 4 4 e b f 4 4 e e f . 
+        . . f e e 4 d 4 1 f d d e f . . 
+        . . . f e e e 4 d d d d f . . . 
+        . . . . f f e e 4 4 4 e f . . . 
+        . . . . . 4 d d e 2 2 2 f . . . 
+        . . . . . e d d e 2 2 2 f . . . 
+        . . . . . f e e f 4 5 5 f . . . 
+        . . . . . . f f f f f f . . . . 
+        . . . . . . . f f f . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . f f f f f f . . . . 
+        . . . . f f e e e e f 2 f . . . 
+        . . . f f e e e e f 2 2 2 f . . 
+        . . . f e e e f f e e e e f . . 
+        . . . f f f f e e 2 2 2 2 e f . 
+        . . . f e 2 2 2 f f f f e 2 f . 
+        . . f f f f f f f e e e f f f . 
+        . . f f e 4 4 e b f 4 4 e e f . 
+        . . f e e 4 d 4 1 f d d e f . . 
+        . . . f e e e e e d d d f . . . 
+        . . . . . f 4 d d e 4 e f . . . 
+        . . . . . f e d d e 2 2 f . . . 
+        . . . . f f f e e f 5 5 f f . . 
+        . . . . f f f f f f f f f f . . 
+        . . . . . f f . . . f f f . . . 
+        `,img`
+        . . . . . . f f f f f f . . . . 
+        . . . . f f e e e e f 2 f . . . 
+        . . . f f e e e e f 2 2 2 f . . 
+        . . . f e e e f f e e e e f . . 
+        . . . f f f f e e 2 2 2 2 e f . 
+        . . . f e 2 2 2 f f f f e 2 f . 
+        . . f f f f f f f e e e f f f . 
+        . . f f e 4 4 e b f 4 4 e e f . 
+        . . f e e 4 d 4 1 f d d e f . . 
+        . . . f e e e 4 d d d d f . . . 
+        . . . . f f e e 4 4 4 e f . . . 
+        . . . . . 4 d d e 2 2 2 f . . . 
+        . . . . . e d d e 2 2 2 f . . . 
+        . . . . . f e e f 4 5 5 f . . . 
+        . . . . . . f f f f f f . . . . 
+        . . . . . . . f f f . . . . . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . f f f f f f . . . . 
+        . . . . f f e e e e f 2 f . . . 
+        . . . f f e e e e f 2 2 2 f . . 
+        . . . f e e e f f e e e e f . . 
+        . . . f f f f e e 2 2 2 2 e f . 
+        . . . f e 2 2 2 f f f f e 2 f . 
+        . . f f f f f f f e e e f f f . 
+        . . f f e 4 4 e b f 4 4 e e f . 
+        . . f e e 4 d 4 1 f d d e f . . 
+        . . . f e e e 4 d d d d f . . . 
+        . . . . 4 d d e 4 4 4 e f . . . 
+        . . . . e d d e 2 2 2 2 f . . . 
+        . . . . f e e f 4 4 5 5 f f . . 
+        . . . . f f f f f f f f f f . . 
+        . . . . . f f . . . f f f . . . 
+        `],
+    100,
+    characterAnimations.rule(Predicate.MovingRight)
+    )
 }
 function closeMenu () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Text)
     sprites.destroyAllSpritesOfKind(SpriteKind.MiniMenu)
     sprites.destroyAllSpritesOfKind(SpriteKind.UIBacking)
+    sprites.destroyAllSpritesOfKind(SpriteKind.Player)
+    sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
+    tiles.setCurrentTilemap(tilemap`level2`)
     scene.setBackgroundImage(img`
         ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
         ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
@@ -432,21 +867,30 @@ function closeMenu () {
         ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
         ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
         `)
+    scene.centerCameraAt(0, 0)
+}
+function finState (line_1: string, line_2: string) {
+    game.splash(line_1, line_2)
+    closeMenu()
+    openMenu()
+    info.setScore(0)
+    info.setLife(0)
+    info.stopCountdown()
 }
 function initTheme () {
     scene.setBackgroundImage(img`
-        cccccccccccccccccccccccddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-        cccccccccccccccccccccccddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-        cccccccccccccccccccccccddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-        cccccccccccccccccccccccddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-        cccccccccccccccccccccccddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-        cccccccccccccccccccccccddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-        cccccccccccccccccccccccddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-        cccccccccccccccccccccccddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-        cccccccccccccccccccccccddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-        cccccccccccccccccccccccddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-        ccccccccccccccccccccccdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-        cccccccccccccccccccccddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        ccccccccccccccccccccccccccccdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        ccccccccccccccccccccccccccccdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        ccccccccccccccccccccccccccccdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        ccccccccccccccccccccccccccccdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        ccccccccccccccccccccccccccccdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        ccccccccccccccccccccccccccccdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        ccccccccccccccccccccccccccccdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        ccccccccccccccccccccccccccccdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        ccccccccccccccccccccccccccccdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        ccccccccccccccccccccccccccccdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        ccccccccccccccccccccccccccccdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        cccccccccccccccccccccccccccddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
         dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
         dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
         dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
@@ -621,6 +1065,9 @@ function initTheme () {
     LongText = textsprite.create("Select (A)")
     LongText.setOutline(1, 12)
     LongText.setPosition(31, 114)
+    textSprite = textsprite.create("Menu")
+    textSprite.setOutline(1, 11)
+    textSprite.setPosition(14, 5)
     if (RandomInt == 0) {
         animation.runImageAnimation(
         MiniPlayer,
@@ -1618,6 +2065,13 @@ function bootApp (appname: string) {
         color.startFadeFromCurrent(color.originalPalette)
     })
 }
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
+    if (DemoPlayerSwordSwung == false) {
+        info.changeLifeBy(-1)
+        info.changeScoreBy(-10)
+        sprites.destroy(sprite)
+    }
+})
 function openMenu () {
     initTheme()
     initIcons()
@@ -1678,6 +2132,15 @@ function loadDataManagementInfo () {
         loadSettingsApp()
     })
 }
+controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (LoadedApp == "MainMenu") {
+    	
+    } else {
+        if (LoadedApp == "DemoGame") {
+            demoGameInputPressed("down")
+        }
+    }
+})
 function bootData () {
     sendConsoleLog("3MU", "3MU V0.0.1")
     sendConsoleLog("3MU", "Loaded Icon: " + blockSettings.readString("3mu_usericon"))
@@ -1737,17 +2200,63 @@ function loadHardwareInfo () {
         loadSettingsApp()
     })
 }
+controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
+    textSprite2 = textsprite.create("Paused")
+    textSprite2.setMaxFontHeight(10)
+    textSprite2.setOutline(1, 12)
+    textSprite2.setPosition(120, 10)
+    IconSelectMenu.setButtonEventsEnabled(false)
+    myMenu = miniMenu.createMenu(
+    miniMenu.createMenuItem("Volume Down"),
+    miniMenu.createMenuItem("Volume Up"),
+    miniMenu.createMenuItem("Home Screen"),
+    miniMenu.createMenuItem("Back")
+    )
+    myMenu.setFrame(img`
+        . c c c c c c c c c c c c c . 
+        c c d d d d d d d d d d d c c 
+        c d d d d d d d d d d d d b c 
+        c d d d d d d d d d d d d b c 
+        c d d d d d d d d d d d d b c 
+        c d d d d d d d d d d d d b c 
+        c d d d d d d d d d d d d b c 
+        c d d d d d d d d d d d d b c 
+        c d d d d d d d d d d d d b c 
+        c d d d d d d d d d d d d b c 
+        c d d d d d d d d d d d d b c 
+        c d d d d d d d d d d d d b c 
+        c d d d d d d d d d d d b b c 
+        c c b b b b b b b b b b b c c 
+        . c c c c c c c c c c c c c . 
+        `)
+    myMenu.setStyleProperty(miniMenu.StyleKind.Default, miniMenu.StyleProperty.Background, 13)
+    myMenu.setPosition(120, 50)
+    textSprite2.setFlag(SpriteFlag.RelativeToCamera, true)
+    myMenu.setFlag(SpriteFlag.RelativeToCamera, true)
+    myMenu.onSelectionChanged(function (selection, selectedIndex) {
+        music.play(music.createSoundEffect(WaveShape.Noise, 3900, 3500, 255, 0, 10, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+    })
+    myMenu.onButtonPressed(controller.A, function (selection, selectedIndex) {
+        music.play(music.createSoundEffect(WaveShape.Triangle, 200, 1, 255, 0, 100, SoundExpressionEffect.None, InterpolationCurve.Curve), music.PlaybackMode.UntilDone)
+        if (selectedIndex == 0) {
+            Volume += -20
+            music.setVolume(Volume)
+            music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.InBackground)
+        } else if (selectedIndex == 1) {
+            Volume += 20
+            music.setVolume(Volume)
+            music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.InBackground)
+        } else if (selectedIndex == 2) {
+            bootApp("Back")
+        } else {
+            IconSelectMenu.setButtonEventsEnabled(true)
+            myMenu.close()
+            sprites.destroy(textSprite2)
+        }
+    })
+})
 function initIcons () {
-    IconSelectMenu = miniMenu.createMenuFromArray([
-    miniMenu.createMenuItem("Settings", assets.image`SettingsApp`),
-    miniMenu.createMenuItem("Demo Game", assets.image`Demo Game Icon`),
-    miniMenu.createMenuItem("App 3", assets.image`Missing Icon`),
-    miniMenu.createMenuItem("App 4", assets.image`Missing Icon`),
-    miniMenu.createMenuItem("App 5", assets.image`Missing Icon`),
-    miniMenu.createMenuItem("App 6", assets.image`Missing Icon`),
-    miniMenu.createMenuItem("App 7", assets.image`Missing Icon`),
-    miniMenu.createMenuItem("App 8", assets.image`Missing Icon`)
-    ])
+    IconSelectMenu = miniMenu.createMenuFromArray([miniMenu.createMenuItem("Settings", assets.image`SettingsApp`), miniMenu.createMenuItem("Demo Game", assets.image`Demo Game Icon`)])
     IconSelectMenu.setMenuStyleProperty(miniMenu.MenuStyleProperty.Rows, 1)
     IconSelectMenu.setMenuStyleProperty(miniMenu.MenuStyleProperty.Height, 20)
     IconSelectMenu.setMenuStyleProperty(miniMenu.MenuStyleProperty.Width, 100)
@@ -1772,8 +2281,22 @@ function initIcons () {
         music.play(music.createSoundEffect(WaveShape.Triangle, 200, 1, 255, 0, 100, SoundExpressionEffect.None, InterpolationCurve.Curve), music.PlaybackMode.UntilDone)
     })
 }
-let Monster: Sprite = null
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
+    info.changeScoreBy(15)
+    info.changeLifeBy(1)
+    sprites.destroy(otherSprite)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    if (DemoPlayerSwordSwung == true) {
+        sprites.destroy(otherSprite)
+        info.changeScoreBy(35)
+    }
+})
+let DemoHeal: Sprite = null
 let MonsterCount = 0
+let Monster: Sprite = null
+let myMenu: miniMenu.MenuSprite = null
+let textSprite2: TextSprite = null
 let RamSizeText: TextSprite = null
 let HashText: TextSprite = null
 let SerialText: TextSprite = null
@@ -1782,36 +2305,28 @@ let SysSoftwareText: TextSprite = null
 let loop = 0
 let Icon: Sprite = null
 let IconSelectMenu: miniMenu.MenuSprite = null
+let textSprite: TextSprite = null
 let LongText: TextSprite = null
 let RandomInt = 0
 let MiniPlayer: Sprite = null
 let RightArrow: Sprite = null
 let DisplayAppName: TextSprite = null
 let TopBar: Sprite = null
-let DemoPlayer: Sprite = null
-let DemoPlayerHasKey = false
 let LeftArrow: Sprite = null
+let DemoPlayer: Sprite = null
+let DemoPlayerSwordSwung = false
 let UserProf: Sprite = null
 let SettingsMenu: miniMenu.MenuSprite = null
 let VerNum: TextSprite = null
 let SettingsTitle: TextSprite = null
 let LoadedApp = ""
 let consolelog: string[] = []
+let Volume = 0
+Volume = 100
 consolelog = []
 openMenu()
-game.onUpdate(function () {
+game.onUpdateInterval(2000, function () {
     if (LoadedApp == "DemoGame") {
-        if (MonsterCount == 50) {
-            game.splash("You received:", "The Key!")
-            DemoPlayerHasKey = true
-        }
-        if (Monster.overlapsWith(DemoPlayer)) {
-            info.changeLifeBy(-1)
-        }
-    }
-})
-game.onUpdateInterval(100, function () {
-    if (DemoPlayerHasKey == true) {
         Monster = sprites.create(img`
             ........................
             ........................
@@ -1841,5 +2356,28 @@ game.onUpdateInterval(100, function () {
         Monster.follow(DemoPlayer, 40)
         tiles.placeOnTile(Monster, tiles.getTileLocation(randint(1, 14), randint(1, 14)))
         MonsterCount += 1
+    }
+})
+game.onUpdateInterval(10000, function () {
+    if (LoadedApp == "DemoGame") {
+        DemoHeal = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . f f f f f . f f f f f . . 
+            . . f f 3 3 3 f f f 3 3 3 f f . 
+            . . f 3 3 3 3 3 f 3 3 3 3 3 f . 
+            . . f 3 3 3 3 3 3 3 1 1 3 3 f . 
+            . . f 3 3 3 3 3 3 3 1 1 3 3 f . 
+            . . f 3 3 3 3 3 3 3 3 3 3 3 f . 
+            . . f f 3 3 3 b b b 3 3 3 f f . 
+            . . . f f 3 b b b b b 3 f f . . 
+            . . . . f f b b b b b f f . . . 
+            . . . . . f f b b b f f . . . . 
+            . . . . . . f f b f f . . . . . 
+            . . . . . . . f f f . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, SpriteKind.Food)
+        tiles.placeOnTile(DemoHeal, tiles.getTileLocation(randint(1, 14), randint(1, 14)))
     }
 })

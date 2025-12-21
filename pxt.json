@@ -9,7 +9,8 @@
         "arcade-text": "github:microsoft/arcade-text#v1.3.0",
         "settings-blocks": "github:microsoft/pxt-settings-blocks#v1.0.0",
         "Timers": "github:microsoft/arcade-timers#v1.1.0",
-        "Control": "github:sargedev/control#4d59722d84a639a38ab19df701397c883f2119c2"
+        "Control": "github:sargedev/control#4d59722d84a639a38ab19df701397c883f2119c2",
+        "arcade-character-animations": "github:microsoft/arcade-character-animations#v0.0.2"
     },
     "files": [
         "main.blocks",
