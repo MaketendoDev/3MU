@@ -1798,7 +1798,7 @@ let SettingsTitle: TextSprite = null
 let LoadedApp = ""
 let consolelog: string[] = []
 consolelog = []
-loadDemoGame()
+openMenu()
 game.onUpdate(function () {
     if (LoadedApp == "DemoGame") {
         if (MonsterCount == 50) {
