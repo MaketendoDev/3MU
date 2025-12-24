@@ -10,7 +10,10 @@
         "settings-blocks": "github:microsoft/pxt-settings-blocks#v1.0.0",
         "Timers": "github:microsoft/arcade-timers#v1.1.0",
         "Control": "github:sargedev/control#4d59722d84a639a38ab19df701397c883f2119c2",
-        "arcade-character-animations": "github:microsoft/arcade-character-animations#v0.0.2"
+        "arcade-character-animations": "github:microsoft/arcade-character-animations#v0.0.2",
+        "radio-broadcast": "*",
+        "arcade-sprite-data": "github:microsoft/arcade-sprite-data#v0.2.1",
+        "Stringify": "github:sargedev/stringify#74e9eee193ec8208a2a12d88e72c218c171a5680"
     },
     "files": [
         "main.blocks",

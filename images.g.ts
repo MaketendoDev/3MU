@@ -23,26 +23,6 @@ namespace myImages {
 . . . . . c c c c c c c . . . . . 
 . . . . . . . . . . . . . . . . . 
 `;
-            case "image1":
-            case "TopBar":return img`
-.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
-.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
-.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
-.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
-.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
-.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
-.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
-.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
-.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
-.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
-.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
-.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
-.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
-.cddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbbc.
-.ccddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbbcc.
-..ccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbcc..
-...cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc...
-`;
             case "image4":
             case "SettingsApp":return img`
 . c c c c c c c c c c c c c c . 
@@ -58,25 +38,6 @@ c d d d b b b d d d d d d d b c
 c d d b b b d d d d d d d d b c 
 c d b b b d d d d d d d d d b c 
 c d b b d d d d d d d d d d b c 
-c d d d d d d d d d d d d d b c 
-c b b b b b b b b b b b b b b c 
-. c c c c c c c c c c c c c c . 
-`;
-            case "image3":
-            case "Missing Icon":return img`
-. c c c c c c c c c c c c c c . 
-c d d d d d d d d d d d d d b c 
-c d d d d d d d d d d d d d b c 
-c d d d d d d d d d d d d d b c 
-c d d d d d d d d d d d d d b c 
-c d d d d d d d d d d d d d b c 
-c d d d d d d d d d d d d d b c 
-c d d d d d d d d d d d d d b c 
-c d d d d d d d d d d d d d b c 
-c d d d d d d d d d d d d d b c 
-c d d d d d d d d d d d d d b c 
-c d d d d d d d d d d d d d b c 
-c d d d d d d d d d d d d d b c 
 c d d d d d d d d d d d d d b c 
 c b b b b b b b b b b b b b b c 
 . c c c c c c c c c c c c c c . 
@@ -241,6 +202,45 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 . . . . b b b b b b b b . . . . 
 . . . . . . . b b b b b . . . . 
 . . . . . . . . . . . . . . . . 
+`;
+            case "image3":
+            case "Missing Icon":return img`
+. c c c c c c c c c c c c c c . 
+c d d d d d d d d d d d d d b c 
+c d d d d d d d d d d d d d b c 
+c d d d d d d d d d d d d d b c 
+c d d d d d d d d d d d d d b c 
+c d d d d d d d d d d d d d b c 
+c d d d d d d d d d d d d d b c 
+c d d d d d d d d d d d d d b c 
+c d d d d d d d d d d d d d b c 
+c d d d d d d d d d d d d d b c 
+c d d d d d d d d d d d d d b c 
+c d d d d d d d d d d d d d b c 
+c d d d d d d d d d d d d d b c 
+c d d d d d d d d d d d d d b c 
+c b b b b b b b b b b b b b b c 
+. c c c c c c c c c c c c c c . 
+`;
+            case "image1":
+            case "TopBar":return img`
+.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
+.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
+.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
+.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
+.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
+.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
+.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
+.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
+.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
+.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
+.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
+.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
+.cdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbc.
+.cddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbbc.
+.ccddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbbcc.
+..ccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbcc..
+...cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc...
 `;
         }
         return null;
